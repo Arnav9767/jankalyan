@@ -10,11 +10,11 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-FAST2SMS_API_KEY='HJi8wSaCrPVSMYLmNHvKnOFDAr17nUA2u59bmRzNnuaoAyRnQcUHGPruUFXp'
+
 
 
 // 🔑 Load API key from .env (never hardcode API keys)
-const FAST2SMS_API_KEY = process.env.FAST2SMS_API_KEY;
+const FAST2SMS_API_KEY = "HJi8wSaCrPVSMYLmNHvKnOFDAr17nUA2u59bmRzNnuaoAyRnQcUHGPruUFXp";
 
 // Health Check
 app.get("/", (req, res) => {
