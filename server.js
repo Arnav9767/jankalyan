@@ -24,27 +24,24 @@ app.get("/", (req, res) => {
 // 📩 Send SMS API
 app.post("/send-sms", async (req, res) => {
     try {
-        const { numbers, message } = req.body;
+        const { numbers, name, regDate, expDate, referral, template_id } = req.body;
 
-        // Validation
         if (!numbers || !Array.isArray(numbers) || numbers.length === 0) {
             return res.status(400).json({ error: "At least one number is required" });
         }
-        if (!message) {
-            return res.status(400).json({ error: "Message is required" });
-        }
 
-        // 📤 Send request to Fast2SMS API
+        // Build the message exactly as in your approved DLT template
+        const message = Hi ${name}, your Jankalyan Premium Membership Plan with Jankalyan Sewabhavi Shiksha Sanstha has been activated. Reg: ${regDate} Exp: ${expDate} Ref: ${referral};
+
         const response = await axios.post(
             "https://www.fast2sms.com/dev/bulkV2",
             {
                 route: "dlt_manual",
-                sender_id: "JKSSAN", // ✅ Approved sender ID
-                message: message,
-                language: "english",
-                flash: 0,
+                sender_id: "JKSSAN",
+                template_id: template_id || "1707175524841618884",
+                variables_values: ${name}|${regDate}|${expDate}|${referral},
                 numbers: numbers.join(","),
-                template_id: "1707175524841618884" // ✅ Hardcoded template ID
+                message: message // ✅ required even with variables_values
             },
             {
                 headers: {
