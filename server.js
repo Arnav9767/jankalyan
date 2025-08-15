@@ -39,12 +39,12 @@ app.post("/send-sms", async (req, res) => {
             "https://www.fast2sms.com/dev/bulkV2",
             {
                 route: "dlt_manual",
-                sender_id: "JKSSEV", // ✅ Approved sender ID
+                sender_id: "JKSSAN", // ✅ Approved sender ID
                 message: message,
                 language: "english",
                 flash: 0,
                 numbers: numbers.join(","),
-                template_id: "1707175488959719941" // ✅ Hardcoded template ID
+                template_id: "1707175524841618884" // ✅ Hardcoded template ID
             },
             {
                 headers: {
