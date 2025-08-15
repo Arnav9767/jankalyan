@@ -31,7 +31,7 @@ app.post("/send-sms", async (req, res) => {
         }
 
         // Build the message exactly as in your approved DLT template
-        const message = Hi ${name}, your Jankalyan Premium Membership Plan with Jankalyan Sewabhavi Shiksha Sanstha has been activated. Reg: ${regDate} Exp: ${expDate} Ref: ${referral};
+        const message = "Hi " + name + ", your Jankalyan Premium Membership Plan with Jankalyan Sewabhavi Shiksha Sanstha has been activated. Reg: " + regDate + " Exp: " + expDate + " Ref: " + referral;
 
         const response = await axios.post(
             "https://www.fast2sms.com/dev/bulkV2",
@@ -39,7 +39,7 @@ app.post("/send-sms", async (req, res) => {
                 route: "dlt_manual",
                 sender_id: "JKSSAN",
                 template_id: template_id || "1707175524841618884",
-                variables_values: ${name}|${regDate}|${expDate}|${referral},
+                variables_values: name + "|" + regDate + "|" + expDate + "|" + referral,
                 numbers: numbers.join(","),
                 message: message // ✅ required even with variables_values
             },
